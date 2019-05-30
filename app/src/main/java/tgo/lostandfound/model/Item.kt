@@ -5,9 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Item @JvmOverloads constructor(
-    @PrimaryKey(autoGenerate = true)
-    val mId: Int?,
+data class Item constructor(
 
     @ColumnInfo(name = "item_name")
     val mItemName: String?,
@@ -23,9 +21,9 @@ data class Item @JvmOverloads constructor(
 
     @ColumnInfo(name = "item_known_person")
     val mPersonKnown: String? = "Unknown"
-){
-    constructor(name:String?, pictureLink:String?, itemLink:String?, itemStoreLink:String?, person:String?)
-            : this(1,name,pictureLink, itemLink, itemStoreLink, person) {
+) {
+    @ColumnInfo(name = "id")
+    @PrimaryKey(autoGenerate = true)
+    var mId: Int? = null
 
-    }
 }

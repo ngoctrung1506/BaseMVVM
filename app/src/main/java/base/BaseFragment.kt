@@ -45,7 +45,7 @@ abstract class BaseFragment : Fragment() {
      *
      */
     fun changeToScreen(newScreen:BaseFragment){
-        mContext.addView(R.id.container_frame, newScreen)
+        mContext.replaceView(R.id.container_frame, newScreen)
         Log.d("AAA", "change screen")
     }
 
@@ -55,7 +55,7 @@ abstract class BaseFragment : Fragment() {
      * @currentScreen fragment of current screen.
      *
      */
-    fun backToScreen(currentScreen: BaseFragment){
+    fun backToPreviousScreen(currentScreen: BaseFragment){
         mContext.removeView(currentScreen)
     }
 }

@@ -64,6 +64,8 @@ class CreatePostFragment : BaseFragment() {
     private val CREATE_POST_ADD_PLACE = 1001
 
     lateinit var mDatabase: AppDataBase
+    var mObjectImgPath: String? = null
+    lateinit var mPlaceImgPath: String
 
 
     override fun getLayoutId(): Int {
@@ -82,7 +84,8 @@ class CreatePostFragment : BaseFragment() {
         activity?.let {
             mDatabase = Room.databaseBuilder(
                 activity!!.applicationContext,
-                AppDataBase::class.java, "item").allowMainThreadQueries().build()
+                AppDataBase::class.java, "item"
+            ).allowMainThreadQueries().build()
 
         }
     }
@@ -97,20 +100,20 @@ class CreatePostFragment : BaseFragment() {
     @OnClick(R.id.create_post_add_object_btn)
     fun takeObjectPhoto() {
         magicalCamera.takeFragmentPhoto(this)
-        startActivityForResult(magicalCamera.getIntentFragment(), CREATE_POST_ADD_OBJECT)
+//        startActivityForResult(magicalCamera.getIntentFragment(), CREATE_POST_ADD_OBJECT)
         Log.d("Path", "take object photo")
     }
 
     @OnClick(R.id.create_post_add_place_btn)
     fun takePlacePhoto() {
         magicalCamera.takeFragmentPhoto(this)
-        startActivityForResult(magicalCamera.getIntentFragment(), CREATE_POST_ADD_PLACE)
+//        startActivityForResult(magicalCamera.getIntentFragment(), CREATE_POST_ADD_PLACE)
         Log.d("Path", "take place photo")
     }
 
     @OnClick(R.id.create_post_btn_back)
     fun onBack() {
-        backToScreen(this)
+        backToPreviousScreen(this)
     }
 
 
@@ -121,23 +124,33 @@ class CreatePostFragment : BaseFragment() {
 
         //this is for rotate picture in this method
         magicalCamera.resultPhoto(requestCode, resultCode, data, MagicalCamera.ORIENTATION_ROTATE_90);
-        var path = magicalCamera.savePhotoInMemoryDevice(
+        mObjectImgPath = magicalCamera.savePhotoInMemoryDevice(
             magicalCamera.photo,
             "first_img",
             MagicalCamera.JPEG,
             true
         )
 
-        if (path != null) {
-            Log.d("Path", path)
+        if (mObjectImgPath != null) {
+            Log.d("Path", mObjectImgPath)
             if (requestCode == CREATE_POST_ADD_OBJECT)
-                Glide.with(this).load(path).into(mObjectImg)
-            else Glide.with(this).load(path).into(mPlaceImg)
-            mDatabase.itemDao().insertItem(Item(mNameObjectTxt.text.toString(), path, mNamePlaceTxt.text.toString(), "a", "Jonh"))
-             Log.d("Item", mDatabase.itemDao().getAllItem().toString())
+                Glide.with(this).load(mObjectImgPath).into(mObjectImg)
+            else Glide.with(this).load(mObjectImgPath).into(mPlaceImg)
+            Log.d("Item", mDatabase.itemDao().getAllItem().toString())
         } else {
             Log.d("Path", "null")
         }
+    }
+
+    @OnClick(R.id.create_post_save_btn)
+    fun onSave() {
+        if (mObjectImgPath != null)
+            mDatabase.itemDao().insertItem(
+                Item(mNameObjectTxt.text.toString(),
+                    mObjectImgPath, mNamePlaceTxt.text.toString(), "a", "Jonh"
+                )
+            )
+        backToPreviousScreen(this)
     }
 
 
