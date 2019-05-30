@@ -21,7 +21,15 @@ abstract class BaseActivity : AppCompatActivity() {
     fun addView(layoutId: Int, fragment: BaseFragment) {
         supportFragmentManager?.beginTransaction()?.run {
             setCustomAnimations(R.anim.slide_in_right, R.anim.fade_in)
-            add(layoutId, fragment)?.commit()
+            add(layoutId, fragment)?.addToBackStack(null).commit()
+
+        }
+    }
+
+    fun addView(layoutId: Int, fragment: BaseFragment, fragmentName: String) {
+        supportFragmentManager?.beginTransaction()?.run {
+            setCustomAnimations(R.anim.slide_in_right, R.anim.fade_in)
+            add(layoutId, fragment)?.addToBackStack(fragmentName).commit()
 
         }
     }
@@ -29,7 +37,14 @@ abstract class BaseActivity : AppCompatActivity() {
     fun replaceView(layoutId: Int, fragment: BaseFragment) {
         supportFragmentManager?.beginTransaction()?.run {
             setCustomAnimations(R.anim.slide_in_right, R.anim.fade_in)
-            replace(layoutId, fragment)?.commit()
+            replace(layoutId, fragment)?.addToBackStack(null).commit()
+        }
+    }
+
+    fun replaceView(layoutId: Int, fragment: BaseFragment, fragmentName:String) {
+        supportFragmentManager?.beginTransaction()?.run {
+            setCustomAnimations(R.anim.slide_in_right, R.anim.fade_in)
+            replace(layoutId, fragment)?.addToBackStack(fragmentName).commit()
         }
     }
 

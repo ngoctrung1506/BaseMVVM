@@ -1,6 +1,7 @@
 package tgo.lostandfound.screen.main
 
 
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.widget.Button
 import android.widget.ImageButton
@@ -81,6 +82,11 @@ class MainScreenFragment : BaseFragment() {
     @OnClick(R.id.main_add_btn)
     fun onMove() {
         changeToScreen(CreatePostFragment())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("onResume", "MainScreenFragment")
     }
 
 }

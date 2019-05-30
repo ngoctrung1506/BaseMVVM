@@ -29,7 +29,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onCreateLayout() {
-        addView(R.id.container_frame, MainScreenFragment())
+        replaceView(R.id.container_frame, MainScreenFragment())
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
