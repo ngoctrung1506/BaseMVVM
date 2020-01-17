@@ -6,24 +6,23 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import butterknife.ButterKnife
+import butterknife.Unbinder
 import tgo.lostandfound.R
 
 abstract class BaseFragment : Fragment() {
 
-    lateinit var mContext:BaseActivity
+    lateinit var mContext: BaseActivity
+    var mUnbinder: Unbinder? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var view:View = inflater.inflate(getLayoutId(), container, false)
-
-        return view
+        return inflater.inflate(getLayoutId(), container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ButterKnife.bind(this, view)
+        mUnbinder = ButterKnife.bind(this, view)
         onCreateLayout()
     }
 
@@ -31,11 +30,16 @@ abstract class BaseFragment : Fragment() {
 
     abstract fun getLayoutId(): Int
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context != null && context is BaseActivity){
+        if (context != null && context is BaseActivity) {
             mContext = context
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mUnbinder?.unbind()
     }
 
     /**
@@ -44,7 +48,7 @@ abstract class BaseFragment : Fragment() {
      *  @newScreen fragment of new screen.
      *
      */
-    fun changeToScreen(newScreen:BaseFragment){
+    fun changeToScreen(newScreen: BaseFragment) {
         mContext.replaceView(R.id.container_frame, newScreen)
         Log.d("AAA", "change screen")
     }
@@ -55,7 +59,7 @@ abstract class BaseFragment : Fragment() {
      * @currentScreen fragment of current screen.
      *
      */
-    fun backToPreviousScreen(currentScreen: BaseFragment){
+    fun backToPreviousScreen(currentScreen: BaseFragment) {
         mContext.removeView(currentScreen)
     }
 }

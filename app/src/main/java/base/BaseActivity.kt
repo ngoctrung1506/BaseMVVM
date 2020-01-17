@@ -3,15 +3,24 @@ package base
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import butterknife.ButterKnife
+import butterknife.Unbinder
 import tgo.lostandfound.R
 
 abstract class BaseActivity : AppCompatActivity() {
 
+    var mUnbinder: Unbinder? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
+        mUnbinder = ButterKnife.bind(this)
         ButterKnife.bind(this)
         onCreateLayout()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mUnbinder?.unbind()
     }
 
     abstract protected fun onCreateLayout()
@@ -41,7 +50,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    fun replaceView(layoutId: Int, fragment: BaseFragment, fragmentName:String) {
+    fun replaceView(layoutId: Int, fragment: BaseFragment, fragmentName: String) {
         supportFragmentManager?.beginTransaction()?.run {
             setCustomAnimations(R.anim.slide_in_right, R.anim.fade_in)
             replace(layoutId, fragment)?.addToBackStack(fragmentName).commit()

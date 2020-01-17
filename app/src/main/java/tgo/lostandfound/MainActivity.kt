@@ -1,27 +1,17 @@
 package tgo.lostandfound
 
-import android.Manifest
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import butterknife.BindView
-import tgo.lostandfound.adapter.PostAdapter
-import tgo.lostandfound.model.Item
-import tgo.lostandfound.model.Post
 import android.content.Intent
 import android.util.Log
-import android.widget.*
+import android.widget.FrameLayout
 import base.BaseActivity
-import butterknife.OnClick
-import com.bumptech.glide.Glide
-import com.frosquivel.magicalcamera.MagicalPermissions
-import com.frosquivel.magicalcamera.MagicalCamera
+import butterknife.BindView
 import tgo.lostandfound.screen.main.MainScreenFragment
 
 
 class MainActivity : BaseActivity() {
 
     @BindView(R.id.container_frame)
-    lateinit var mContainerFr:FrameLayout
+    lateinit var mContainerFr: FrameLayout
 
 
     override fun getLayoutId(): Int {
