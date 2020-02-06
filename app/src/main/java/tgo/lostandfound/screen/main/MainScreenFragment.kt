@@ -25,7 +25,10 @@ import tgo.lostandfound.screen.createpost.CreatePostFragment
  * A simple [Fragment] subclass.
  *
  */
-class MainScreenFragment : BaseFragment() {
+class MainScreenFragment : BaseFragment<MainScreenViewModel>() {
+
+    override fun getViewModelClass(): Class<MainScreenViewModel>? = MainScreenViewModel::class.java
+
 
     @BindView(R.id.main_search_btn)
     lateinit var mSearchBtn: ImageButton
@@ -50,7 +53,6 @@ class MainScreenFragment : BaseFragment() {
         return R.layout.fragment_main_screen
     }
 
-    override fun getViewModelClass(): Class<out BaseViewModel>? = MainScreenViewModel::class.java
 
     override fun onCreateLayout() {
         activity?.let {
