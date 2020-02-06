@@ -12,11 +12,13 @@ import butterknife.ButterKnife
 import butterknife.Unbinder
 import tgo.lostandfound.R
 
-abstract class BaseFragment<T> : Fragment() {
+
+abstract class BaseFragment<T> : Fragment() where T : BaseViewModel{
 
     lateinit var mContext: BaseActivity
+    
     var mUnbinder: Unbinder? = null
-    var mViewModel: Class<T>? = null
+    var mViewModel: T? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,7 +63,7 @@ abstract class BaseFragment<T> : Fragment() {
      *  @newScreen fragment of new screen.
      *
      */
-    fun changeToScreen(newScreen: BaseFragment) {
+    fun changeToScreen(newScreen : BaseFragment<T>) {
         mContext.replaceView(R.id.container_frame, newScreen)
         Log.d("AAA", "change screen")
     }
@@ -72,7 +74,7 @@ abstract class BaseFragment<T> : Fragment() {
      * @currentScreen fragment of current screen.
      *
      */
-    fun backToPreviousScreen(currentScreen: BaseFragment) {
+    fun backToPreviousScreen(currentScreen: BaseFragment<T>) {
         mContext.removeView(currentScreen)
     }
 }
