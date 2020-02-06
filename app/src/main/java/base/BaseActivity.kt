@@ -2,6 +2,7 @@ package base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import tgo.lostandfound.R
@@ -9,12 +10,18 @@ import tgo.lostandfound.R
 abstract class BaseActivity : AppCompatActivity() {
 
     var mUnbinder: Unbinder? = null
+    var mViewModel: BaseViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
         mUnbinder = ButterKnife.bind(this)
-        ButterKnife.bind(this)
+
+        val viewModelClass = initViewModelClass()
+        if (viewModelClass != null) {
+            mViewModel = ViewModelProvider.AndroidViewModelFactory(application)
+                .create(viewModelClass)
+        }
         onCreateLayout()
     }
 
@@ -22,6 +29,8 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onDestroy()
         mUnbinder?.unbind()
     }
+
+    abstract protected fun initViewModelClass(): Class<out BaseViewModel>?
 
     abstract protected fun onCreateLayout()
 

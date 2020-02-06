@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import base.BaseFragment
+import base.BaseViewModel
 import butterknife.BindView
 import butterknife.OnClick
 import tgo.lostandfound.R
@@ -49,6 +50,8 @@ class MainScreenFragment : BaseFragment() {
         return R.layout.fragment_main_screen
     }
 
+    override fun getViewModelClass(): Class<out BaseViewModel>? = MainScreenViewModel::class.java
+
     override fun onCreateLayout() {
         activity?.let {
             mDatabase = Room.databaseBuilder(
@@ -60,15 +63,17 @@ class MainScreenFragment : BaseFragment() {
         mListItem = if (mDatabase.itemDao().getAllItem() != null) {
             mDatabase.itemDao().getAllItem()
         } else mutableListOf<Item>()
+
+
         mListPost = mutableListOf<Post>()
         mListPost.add(Post("13/05/2019", mListItem))
-        mListPost.add(Post("13/05/2019", mListItem))
-        mListPost.add(Post("13/05/2019", mListItem))
-        mListPost.add(Post("13/05/2019", mListItem))
-        mListPost.add(Post("13/05/2019", mListItem))
-        mListPost.add(Post("13/05/2019", mListItem))
+        mListPost.add(Post("14/05/2019", mListItem))
+        mListPost.add(Post("15/05/2019", mListItem))
+        mListPost.add(Post("16/05/2019", mListItem))
+        mListPost.add(Post("17/05/2019", mListItem))
+        mListPost.add(Post("18/05/2019", mListItem))
         mPostAdapter = PostAdapter(mListPost, requireContext())
-        var layoutManager1: androidx.recyclerview.widget.LinearLayoutManager =
+        var layoutManager1: LinearLayoutManager =
             LinearLayoutManager(
                 activity,
                 RecyclerView.VERTICAL, false
@@ -76,12 +81,20 @@ class MainScreenFragment : BaseFragment() {
         activity
         mObjectRecycler.layoutManager = layoutManager1
         mObjectRecycler.adapter = mPostAdapter
+
+        mViewModel.
     }
 
 
     @OnClick(R.id.main_add_btn)
     fun onMove() {
         changeToScreen(CreatePostFragment())
+//        val list = mDatabase.itemDao().getAllItem()
+//        mListPost.add(Post("13/05/2019", list))
+//        mListPost.add(Post("14/05/2019", list))
+//        mListPost.add(Post("15/05/2019", list))
+//        mListPost.add(Post("16/05/2019", list))
+//        mPostAdapter.updateList(mListPost)
     }
 
     override fun onResume() {

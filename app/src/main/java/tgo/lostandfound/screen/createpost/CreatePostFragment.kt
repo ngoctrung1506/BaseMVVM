@@ -3,18 +3,18 @@ package tgo.lostandfound.screen.createpost
 import android.Manifest
 import android.content.Intent
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.room.Room
 import base.BaseFragment
+import base.BaseViewModel
 import butterknife.BindView
 import butterknife.OnClick
 import com.bumptech.glide.Glide
 import com.frosquivel.magicalcamera.MagicalCamera
 import com.frosquivel.magicalcamera.MagicalPermissions
-
 import tgo.lostandfound.R
 import tgo.lostandfound.database.AppDataBase
 import tgo.lostandfound.model.Item
@@ -31,6 +31,8 @@ import tgo.lostandfound.model.Item
  */
 class CreatePostFragment : BaseFragment() {
 
+    override fun getViewModelClass(): Class<out BaseViewModel>? = CreatePostViewModel::class.java
+
     @BindView(R.id.create_post_add_object_btn)
     lateinit var mAddObjectBtn: Button
 
@@ -43,8 +45,8 @@ class CreatePostFragment : BaseFragment() {
     @BindView(R.id.create_post_object_img)
     lateinit var mObjectImg: ImageView
 
-    @BindView(R.id.create_post_add_place_btn)
-    lateinit var mAddPlaceBtn: Button
+//    @BindView(R.id.create_post_add_place_btn)
+//    lateinit var mAddPlaceBtn: Button
 
     @BindView(R.id.create_post_place_name_txt)
     lateinit var mNamePlaceTxt: EditText
@@ -90,7 +92,11 @@ class CreatePostFragment : BaseFragment() {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         val map = magicalPermissions.permissionResult(requestCode, permissions, grantResults)
         for (permission in map.keys) {
             Log.d("PERMISSIONS", permission + " was: " + map[permission])
@@ -104,12 +110,12 @@ class CreatePostFragment : BaseFragment() {
         Log.d("Path", "take object photo")
     }
 
-    @OnClick(R.id.create_post_add_place_btn)
-    fun takePlacePhoto() {
-        magicalCamera.takeFragmentPhoto(this)
-//        startActivityForResult(magicalCamera.getIntentFragment(), CREATE_POST_ADD_PLACE)
-        Log.d("Path", "take place photo")
-    }
+//    @OnClick(R.id.create_post_add_place_btn)
+//    fun takePlacePhoto() {
+//        magicalCamera.takeFragmentPhoto(this)
+////        startActivityForResult(magicalCamera.getIntentFragment(), CREATE_POST_ADD_PLACE)
+//        Log.d("Path", "take place photo")
+//    }
 
     @OnClick(R.id.create_post_btn_back)
     fun onBack() {
@@ -123,7 +129,12 @@ class CreatePostFragment : BaseFragment() {
         magicalCamera.resultPhoto(requestCode, resultCode, data);
 
         //this is for rotate picture in this method
-        magicalCamera.resultPhoto(requestCode, resultCode, data, MagicalCamera.ORIENTATION_ROTATE_90);
+        magicalCamera.resultPhoto(
+            requestCode,
+            resultCode,
+            data,
+            MagicalCamera.ORIENTATION_ROTATE_90
+        );
         mObjectImgPath = magicalCamera.savePhotoInMemoryDevice(
             magicalCamera.photo,
             "first_img",
@@ -144,12 +155,13 @@ class CreatePostFragment : BaseFragment() {
 
     @OnClick(R.id.create_post_save_btn)
     fun onSave() {
-        if (mObjectImgPath != null)
-            mDatabase.itemDao().insertItem(
-                Item(mNameObjectTxt.text.toString(),
-                    mObjectImgPath, mNamePlaceTxt.text.toString(), "a", "Jonh"
-                )
+//        if (mObjectImgPath != null)
+        mDatabase.itemDao().insertItem(
+            Item(
+                mNameObjectTxt.text.toString(),
+                mObjectImgPath, mNamePlaceTxt.text.toString(), "a", "Jonh"
             )
+        )
         backToPreviousScreen(this)
     }
 

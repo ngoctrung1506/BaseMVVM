@@ -32,14 +32,20 @@ android {
 //        }
 //    }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 ext {
     lib_versions = [
-            butter_knife: "10.2.0"
+            butter_knife : "10.2.0",
+            glide_version: "4.9.0",
+            lifecycle_version: "2.2.0"
     ]
 
-    glide = ["4.9.0"]
 }
 
 dependencies {
@@ -63,13 +69,18 @@ dependencies {
     kapt "com.jakewharton:butterknife-compiler:$lib_versions.butter_knife"
 
     // Glide -- Image lib
-    implementation "com.github.bumptech.glide:glide:$glide"
-    annotationProcessor "com.github.bumptech.glide:compiler:$glide"
+    implementation "com.github.bumptech.glide:glide:$lib_versions.glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$lib_versions.glide_version"
 
     implementation 'com.frosquivel:magicalcamera:6.0.0'
 
     implementation "android.arch.persistence.room:runtime:1.1.1"
     kapt "android.arch.persistence.room:compiler:1.1.1"
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lib_versions.lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lib_versions.lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lib_versions.lifecycle_version"
 
 
 }

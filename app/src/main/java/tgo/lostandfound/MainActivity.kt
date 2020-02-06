@@ -4,11 +4,14 @@ import android.content.Intent
 import android.util.Log
 import android.widget.FrameLayout
 import base.BaseActivity
+import base.BaseViewModel
 import butterknife.BindView
 import tgo.lostandfound.screen.main.MainScreenFragment
 
 
 class MainActivity : BaseActivity() {
+
+    override fun initViewModelClass(): Class<out BaseViewModel>? = null
 
     @BindView(R.id.container_frame)
     lateinit var mContainerFr: FrameLayout

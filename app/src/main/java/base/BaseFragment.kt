@@ -7,26 +7,39 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import tgo.lostandfound.R
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment<T> : Fragment() {
 
     lateinit var mContext: BaseActivity
     var mUnbinder: Unbinder? = null
+    var mViewModel: Class<T>? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(getLayoutId(), container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mUnbinder = ButterKnife.bind(this, view)
+        val viewModelClass = getViewModelClass()
+        if (viewModelClass != null) {
+            mViewModel = ViewModelProvider.AndroidViewModelFactory(mContext.application)
+                .create(viewModelClass)
+        }
         onCreateLayout()
     }
 
     abstract protected fun onCreateLayout()
+
+    abstract protected fun getViewModelClass(): Class<T>?
 
     abstract fun getLayoutId(): Int
 
