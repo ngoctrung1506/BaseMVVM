@@ -13,12 +13,12 @@ import butterknife.Unbinder
 import tgo.lostandfound.R
 
 
-abstract class BaseFragment<T> : Fragment() where T : BaseViewModel{
+abstract class BaseFragment<VM> : Fragment() where VM : BaseViewModel<*> {
 
     lateinit var mContext: BaseActivity
-    
+
     var mUnbinder: Unbinder? = null
-    var mViewModel: T? = null
+    var mViewModel: VM? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +41,7 @@ abstract class BaseFragment<T> : Fragment() where T : BaseViewModel{
 
     abstract protected fun onCreateLayout()
 
-    abstract protected fun getViewModelClass(): Class<T>?
+    abstract protected fun getViewModelClass(): Class<VM>?
 
     abstract fun getLayoutId(): Int
 
@@ -63,7 +63,7 @@ abstract class BaseFragment<T> : Fragment() where T : BaseViewModel{
      *  @newScreen fragment of new screen.
      *
      */
-    fun changeToScreen(newScreen : BaseFragment<T>) {
+    fun changeToScreen(newScreen: BaseFragment<VM>) {
         mContext.replaceView(R.id.container_frame, newScreen)
         Log.d("AAA", "change screen")
     }
@@ -74,7 +74,15 @@ abstract class BaseFragment<T> : Fragment() where T : BaseViewModel{
      * @currentScreen fragment of current screen.
      *
      */
-    fun backToPreviousScreen(currentScreen: BaseFragment<T>) {
+    fun backToPreviousScreen(currentScreen: BaseFragment<VM>) {
         mContext.removeView(currentScreen)
     }
+
+//    // TODO: implement this function when loading data is started
+//    fun showLoading() {
+//    }
+//
+//    // TODO: implement this function when loading data is done
+//    fun hideLoading() {
+//    }
 }

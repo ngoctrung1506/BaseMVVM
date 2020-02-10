@@ -9,7 +9,6 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.room.Room
 import base.BaseFragment
-import base.BaseViewModel
 import butterknife.BindView
 import butterknife.OnClick
 import com.bumptech.glide.Glide
@@ -29,9 +28,10 @@ import tgo.lostandfound.model.Item
  * create an instance of this fragment.
  *
  */
-class CreatePostFragment : BaseFragment() {
+class CreatePostFragment : BaseFragment<CreatePostViewModel>() {
 
-    override fun getViewModelClass(): Class<out BaseViewModel>? = CreatePostViewModel::class.java
+    override fun getViewModelClass(): Class<CreatePostViewModel>? =
+        CreatePostViewModel::class.java
 
     @BindView(R.id.create_post_add_object_btn)
     lateinit var mAddObjectBtn: Button
