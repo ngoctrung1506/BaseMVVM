@@ -4,14 +4,16 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import base.BaseViewModel
 import tgo.lostandfound.model.Item
-import tgo.lostandfound.model.Post
 
-class MainScreenViewModel(application: Application) : BaseViewModel(application) {
+class MainScreenViewModel(application: Application) : BaseViewModel<MainRepository>(application) {
+
+    override fun initRepositoryClass(): Class<MainRepository> {
+        return MainRepository::class.java
+    }
 
     lateinit var mListItem: MutableLiveData<Item>
-    lateinit var mMainScreenRepo: MainScreenRepo
 
     init {
-        val mListItem = mMainScreenRepo.getListItem()
+        val mListItem = mRepository.getListItem()
     }
 }
