@@ -7,10 +7,10 @@ import butterknife.ButterKnife
 import butterknife.Unbinder
 import tgo.lostandfound.R
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity<VM> : AppCompatActivity() where VM : BaseViewModel {
 
     var mUnbinder: Unbinder? = null
-    var mViewModel: BaseViewModel? = null
+    var mViewModel: VM? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,7 @@ abstract class BaseActivity : AppCompatActivity() {
         mUnbinder?.unbind()
     }
 
-    abstract protected fun initViewModelClass(): Class<out BaseViewModel>?
+    abstract protected fun initViewModelClass(): Class<VM>?
 
     abstract protected fun onCreateLayout()
 

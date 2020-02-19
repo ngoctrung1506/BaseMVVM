@@ -41,9 +41,10 @@ android {
 
 ext {
     lib_versions = [
-            butter_knife : "10.2.0",
-            glide_version: "4.9.0",
-            lifecycle_version: "2.2.0"
+            butter_knife     : "10.2.0",
+            glide_version    : "4.9.0",
+            lifecycle_version: "2.2.0",
+            moshi            : "2.4.0"
     ]
 
 }
@@ -81,6 +82,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lib_versions.lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lib_versions.lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lib_versions.lifecycle_version"
+
+    implementation "com.squareup.retrofit2:converter-moshi:$lib_versions.moshi"
 
 
 }

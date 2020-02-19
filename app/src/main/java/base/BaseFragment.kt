@@ -13,9 +13,9 @@ import butterknife.Unbinder
 import tgo.lostandfound.R
 
 
-abstract class BaseFragment<VM> : Fragment() where VM : BaseViewModel<*> {
+abstract class BaseFragment<VM> : Fragment() where VM : BaseViewModel {
 
-    lateinit var mContext: BaseActivity
+    var mContext: BaseActivity<*>? = null
 
     var mUnbinder: Unbinder? = null
     var mViewModel: VM? = null
@@ -33,8 +33,10 @@ abstract class BaseFragment<VM> : Fragment() where VM : BaseViewModel<*> {
         mUnbinder = ButterKnife.bind(this, view)
         val viewModelClass = getViewModelClass()
         if (viewModelClass != null) {
-            mViewModel = ViewModelProvider.AndroidViewModelFactory(mContext.application)
-                .create(viewModelClass)
+            mContext?.let {
+                mViewModel = ViewModelProvider.AndroidViewModelFactory(it.application)
+                    .create(viewModelClass)
+            }
         }
         onCreateLayout()
     }
@@ -47,9 +49,14 @@ abstract class BaseFragment<VM> : Fragment() where VM : BaseViewModel<*> {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context != null && context is BaseActivity) {
+        if (context is BaseActivity<*>) {
             mContext = context
         }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mContext = null
     }
 
     override fun onDestroyView() {
@@ -64,7 +71,7 @@ abstract class BaseFragment<VM> : Fragment() where VM : BaseViewModel<*> {
      *
      */
     fun changeToScreen(newScreen: BaseFragment<VM>) {
-        mContext.replaceView(R.id.container_frame, newScreen)
+        mContext?.replaceView(R.id.container_frame, newScreen)
         Log.d("AAA", "change screen")
     }
 
@@ -75,7 +82,7 @@ abstract class BaseFragment<VM> : Fragment() where VM : BaseViewModel<*> {
      *
      */
     fun backToPreviousScreen(currentScreen: BaseFragment<VM>) {
-        mContext.removeView(currentScreen)
+        mContext?.removeView(currentScreen)
     }
 
 //    // TODO: implement this function when loading data is started
