@@ -30,8 +30,6 @@ import tgo.lostandfound.model.Item
  */
 class CreatePostFragment : BaseFragment<CreatePostViewModel>() {
 
-    override fun getViewModelClass(): Class<CreatePostViewModel>? =
-        CreatePostViewModel::class.java
 
     @BindView(R.id.create_post_add_object_btn)
     lateinit var mAddObjectBtn: Button
@@ -73,6 +71,9 @@ class CreatePostFragment : BaseFragment<CreatePostViewModel>() {
     override fun getLayoutId(): Int {
         return R.layout.fragment_create_post
     }
+
+    override fun getViewModelClass(): Class<CreatePostViewModel>? =
+        CreatePostViewModel::class.java
 
     override fun onCreateLayout() {
         val permissions = arrayOf(

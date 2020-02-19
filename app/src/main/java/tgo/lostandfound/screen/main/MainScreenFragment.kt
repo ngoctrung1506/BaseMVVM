@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import base.BaseFragment
-import base.BaseViewModel
 import butterknife.BindView
 import butterknife.OnClick
 import tgo.lostandfound.R
@@ -84,13 +83,14 @@ class MainScreenFragment : BaseFragment<MainScreenViewModel>() {
         mObjectRecycler.layoutManager = layoutManager1
         mObjectRecycler.adapter = mPostAdapter
 
-        mViewModel.
+        mListPost.onEach { it.day + "safs" }
+//        mViewModel.
     }
 
 
     @OnClick(R.id.main_add_btn)
     fun onMove() {
-        changeToScreen(CreatePostFragment())
+//        changeToScreen(CreatePostFragment())
 //        val list = mDatabase.itemDao().getAllItem()
 //        mListPost.add(Post("13/05/2019", list))
 //        mListPost.add(Post("14/05/2019", list))
