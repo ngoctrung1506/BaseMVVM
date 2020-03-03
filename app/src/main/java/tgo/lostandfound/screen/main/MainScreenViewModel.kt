@@ -13,7 +13,11 @@ class MainScreenViewModel(application: Application) : BaseViewModel(application)
 
     lateinit var mListItem: MutableLiveData<Item>
 
+    lateinit var mMainRepository: MainRepository
+
     init {
-//        val mListItem = mRepository.getListItem()
+
+//        mMainRepository = MainRepository()
+        val mListItem = mMainRepository.getListItem("trung")
     }
 }

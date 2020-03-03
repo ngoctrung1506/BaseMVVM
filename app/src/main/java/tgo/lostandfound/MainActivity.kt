@@ -3,6 +3,7 @@ package tgo.lostandfound
 import android.content.Intent
 import android.util.Log
 import android.widget.FrameLayout
+import android.widget.TextView
 import base.BaseActivity
 import butterknife.BindView
 import tgo.lostandfound.screen.main.MainScreenFragment

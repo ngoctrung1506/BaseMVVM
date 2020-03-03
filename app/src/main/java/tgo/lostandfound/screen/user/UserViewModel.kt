@@ -9,7 +9,7 @@ import tgo.lostandfound.api.user.UserInfo
 
 class UserViewModel(application: Application) : BaseViewModel(application) {
 
-    var userInfo: MutableLiveData<UserInfo>? = MutableLiveData<UserInfo>()
+    var userInfo: MutableLiveData<UserInfo>? = MutableLiveData()
     var userRepository: UserRepository? = null
     var userApi: IUserApi? = null
 
@@ -18,11 +18,12 @@ class UserViewModel(application: Application) : BaseViewModel(application) {
         userApi?.let {
             userRepository = UserRepository(it)
         }
-        userInfo = userRepository?.getUserByLoginInfo("trung")
+
     }
 
-    fun getUserByLoginInfo(login: String) {
+    fun getUserByLoginInfo(login: String): MutableLiveData<UserInfo>? {
         userInfo = userRepository?.getUserByLoginInfo(login)
+        return userInfo
     }
 
 }
