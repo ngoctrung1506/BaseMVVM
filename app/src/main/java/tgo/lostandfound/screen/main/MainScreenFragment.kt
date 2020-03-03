@@ -17,7 +17,6 @@ import tgo.lostandfound.adapter.PostAdapter
 import tgo.lostandfound.database.AppDataBase
 import tgo.lostandfound.model.Item
 import tgo.lostandfound.model.Post
-import tgo.lostandfound.screen.createpost.CreatePostFragment
 
 
 /**
@@ -25,9 +24,6 @@ import tgo.lostandfound.screen.createpost.CreatePostFragment
  *
  */
 class MainScreenFragment : BaseFragment<MainScreenViewModel>() {
-
-    override fun getViewModelClass(): Class<MainScreenViewModel>? = MainScreenViewModel::class.java
-
 
     @BindView(R.id.main_search_btn)
     lateinit var mSearchBtn: ImageButton
@@ -51,6 +47,8 @@ class MainScreenFragment : BaseFragment<MainScreenViewModel>() {
     override fun getLayoutId(): Int {
         return R.layout.fragment_main_screen
     }
+
+    override fun getViewModelClass(): Class<MainScreenViewModel>? = MainScreenViewModel::class.java
 
 
     override fun onCreateLayout() {
