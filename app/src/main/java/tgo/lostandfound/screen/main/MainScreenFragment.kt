@@ -6,14 +6,14 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
 import base.BaseFragment
+import base.api.BaseObserser
 import butterknife.BindView
 import butterknife.OnClick
 import tgo.lostandfound.R
 import tgo.lostandfound.adapter.PostAdapter
+import tgo.lostandfound.api.meta.MetaData
 import tgo.lostandfound.database.AppDataBase
 import tgo.lostandfound.model.Item
 import tgo.lostandfound.model.Post
@@ -52,37 +52,45 @@ class MainScreenFragment : BaseFragment<MainScreenViewModel>() {
 
 
     override fun onCreateLayout() {
-        activity?.let {
-            mDatabase = Room.databaseBuilder(
-                activity!!.applicationContext,
-                AppDataBase::class.java, "item"
-            ).allowMainThreadQueries().build()
+//        activity?.let {
+//            mDatabase = Room.databaseBuilder(
+//                activity!!.applicationContext,
+//                AppDataBase::class.java, "item"
+//            ).allowMainThreadQueries().build()
+//
+//        }
+//        mListItem = if (mDatabase.itemDao().getAllItem() != null) {
+//            mDatabase.itemDao().getAllItem()
+//        } else mutableListOf<Item>()
+//
+//
+//        mListPost = mutableListOf<Post>()
+//        mListPost.add(Post("13/05/2019", mListItem))
+//        mListPost.add(Post("14/05/2019", mListItem))
+//        mListPost.add(Post("15/05/2019", mListItem))
+//        mListPost.add(Post("16/05/2019", mListItem))
+//        mListPost.add(Post("17/05/2019", mListItem))
+//        mListPost.add(Post("18/05/2019", mListItem))
+//        mPostAdapter = PostAdapter(mListPost, requireContext())
+//        var layoutManager1: LinearLayoutManager =
+//            LinearLayoutManager(
+//                activity,
+//                RecyclerView.VERTICAL, false
+//            )
+//        activity
+//        mObjectRecycler.layoutManager = layoutManager1
+//        mObjectRecycler.adapter = mPostAdapter
+//
+//        mListPost.onEach { it.day + "safs" }
+        mViewModel?.getListItem()?.observe(this, object : BaseObserser<MetaData>() {
+            override fun onFail(error: String) {
+                Log.d("Info", "Meta: " + error)
+            }
 
-        }
-        mListItem = if (mDatabase.itemDao().getAllItem() != null) {
-            mDatabase.itemDao().getAllItem()
-        } else mutableListOf<Item>()
-
-
-        mListPost = mutableListOf<Post>()
-        mListPost.add(Post("13/05/2019", mListItem))
-        mListPost.add(Post("14/05/2019", mListItem))
-        mListPost.add(Post("15/05/2019", mListItem))
-        mListPost.add(Post("16/05/2019", mListItem))
-        mListPost.add(Post("17/05/2019", mListItem))
-        mListPost.add(Post("18/05/2019", mListItem))
-        mPostAdapter = PostAdapter(mListPost, requireContext())
-        var layoutManager1: LinearLayoutManager =
-            LinearLayoutManager(
-                activity,
-                RecyclerView.VERTICAL, false
-            )
-        activity
-        mObjectRecycler.layoutManager = layoutManager1
-        mObjectRecycler.adapter = mPostAdapter
-
-        mListPost.onEach { it.day + "safs" }
-//        mViewModel.
+            override fun onSuccess(data: MetaData) {
+                Log.d("Info", "Meta: " + data.listHooks.toString())
+            }
+        })
     }
 
 

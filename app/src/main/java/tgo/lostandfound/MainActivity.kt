@@ -12,7 +12,7 @@ import tgo.lostandfound.screen.user.UserViewModel
 
 class MainActivity : BaseActivity<UserViewModel>() {
     override fun initViewModelClass(): Class<UserViewModel>? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return null
     }
 
 
