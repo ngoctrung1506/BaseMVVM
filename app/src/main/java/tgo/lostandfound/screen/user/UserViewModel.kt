@@ -4,25 +4,23 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import base.BaseViewModel
 import base.api.Result
-import tgo.lostandfound.api.RetrofitService
-import tgo.lostandfound.api.user.IUserApi
+import base.di.DaggerRepositoryComponent
 import tgo.lostandfound.api.user.UserInfo
+import javax.inject.Inject
 
 class UserViewModel(application: Application) : BaseViewModel(application) {
 
     var userInfo: MutableLiveData<Result<UserInfo>>? = MutableLiveData()
-    var userRepository: UserRepository? = null
-    var userApi: IUserApi? = null
+
+    @Inject
+    lateinit var userRepository: UserRepository
 
     init {
-        userApi = RetrofitService.createService(IUserApi::class.java)
-        userApi?.let {
-            userRepository = UserRepository(it)
-        }
+        DaggerRepositoryComponent.builder().build().inject(this)
     }
 
     fun getUserByLoginInfo(login: String): MutableLiveData<Result<UserInfo>>? =
-        userRepository?.getUserByLoginInfo(login)
+        userRepository.getUserByLoginInfo(login)
 
 
 }

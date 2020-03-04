@@ -3,21 +3,25 @@ package tgo.lostandfound.screen.main
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import base.BaseViewModel
+import base.di.DaggerRepositoryComponent
 import tgo.lostandfound.model.Item
+import javax.inject.Inject
 
 class MainScreenViewModel(application: Application) : BaseViewModel(application) {
 
-//    override fun initRepositoryClass(): Class<MainRepository> {
-//        return MainRepository::class.java
-//    }
-
-    lateinit var mListItem: MutableLiveData<Item>
-
-    lateinit var mMainRepository: MainRepository
 
     init {
-
-//        mMainRepository = MainRepository()
-        val mListItem = mMainRepository.getListItem("trung")
+        DaggerRepositoryComponent.builder().build().inject(this)
     }
+
+//    lateinit var mListItem: MutableLiveData<Item>
+
+    @Inject
+    lateinit var mMainRepository: MainScreenRepo
+
+    init {
+        val mListItem = mMainRepository.getListItem()
+    }
+
+    fun getListItem() = mMainRepository.getListItem()
 }

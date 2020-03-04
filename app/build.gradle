@@ -44,7 +44,8 @@ ext {
             butter_knife     : "10.2.0",
             glide_version    : "4.9.0",
             lifecycle_version: "2.2.0",
-            moshi            : "2.4.0"
+            moshi            : "2.4.0",
+            dagger_version   : "2.5"
     ]
 
 }
@@ -83,7 +84,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lib_versions.lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lib_versions.lifecycle_version"
 
+    // moshi
     implementation "com.squareup.retrofit2:converter-moshi:$lib_versions.moshi"
+
+    // dagger
+    implementation "com.google.dagger:dagger:$lib_versions.dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$lib_versions.dagger_version"
 
 
 }
