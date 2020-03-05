@@ -3,8 +3,7 @@ package tgo.lostandfound.screen.main
 import androidx.lifecycle.MutableLiveData
 import base.api.BaseCallBack
 import base.api.Result
-import base.di.DaggerApiComponent
-import base.di.DaggerRepositoryComponent
+import base.di.MySelfApp
 import tgo.lostandfound.api.meta.IMetaApi
 import tgo.lostandfound.api.meta.MetaData
 import tgo.lostandfound.dao.ItemDao
@@ -18,7 +17,7 @@ class MainScreenRepo {
     lateinit var mMetaDataApi: IMetaApi
 
     init {
-        DaggerApiComponent.builder().build().inject(this)
+        MySelfApp.mApiComponent.inject(this)
     }
 
 //    fun getListItem() = mItemDao.getAllItem()
