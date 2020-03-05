@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import base.BaseViewModel
 import base.di.DaggerRepositoryComponent
+import base.di.MySelfApp
 import tgo.lostandfound.model.Item
 import javax.inject.Inject
 
@@ -11,7 +12,7 @@ class MainScreenViewModel(application: Application) : BaseViewModel(application)
 
 
     init {
-        DaggerRepositoryComponent.builder().build().inject(this)
+         MySelfApp.mRepositoryComponent.inject(this)
     }
 
 //    lateinit var mListItem: MutableLiveData<Item>

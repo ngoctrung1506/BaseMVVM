@@ -3,7 +3,7 @@ package tgo.lostandfound.screen.user
 import androidx.lifecycle.MutableLiveData
 import base.api.BaseCallBack
 import base.api.Result
-import base.di.DaggerApiComponent
+import base.di.MySelfApp
 import tgo.lostandfound.api.user.IUserApi
 import tgo.lostandfound.api.user.UserInfo
 import javax.inject.Inject
@@ -14,7 +14,7 @@ class UserRepository {
     lateinit var userApi: IUserApi
 
     init {
-        DaggerApiComponent.builder().build().inject(this)
+        MySelfApp.mApiComponent.inject(this)
     }
 
 
