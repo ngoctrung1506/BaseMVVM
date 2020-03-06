@@ -15,7 +15,7 @@ class ApiModule {
 
     companion object {
         const val BASE_URL = "https://api.github.com/"
-        const val TIME_OUT = 120L
+        const val TIME_OUT = 60L
     }
 
     @Provides

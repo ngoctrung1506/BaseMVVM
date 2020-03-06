@@ -10,6 +10,7 @@ import javax.inject.Inject
 
 class UserViewModel(application: Application) : BaseViewModel(application) {
 
+
     var userInfo: MutableLiveData<Result<UserInfo>>? = MutableLiveData()
 
     @Inject

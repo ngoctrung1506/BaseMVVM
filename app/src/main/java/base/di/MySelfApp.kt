@@ -1,6 +1,8 @@
 package base.di
 
 import android.app.Application
+import base.di.demo.DaggerDemoComponent
+import base.di.demo.DemoComponent
 
 class MySelfApp : Application() {
 
