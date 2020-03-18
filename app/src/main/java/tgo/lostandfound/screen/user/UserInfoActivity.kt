@@ -1,12 +1,13 @@
 package tgo.lostandfound.screen.user
 
-import android.content.Intent
+import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
-import base.BaseActivity
+import base.api.BaseObserser
+import base.mvvm.BaseActivity
 import kotlinx.android.synthetic.main.activity_user_info.*
-import tgo.lostandfound.MainActivity
 import tgo.lostandfound.R
+import tgo.lostandfound.api.user.UserInfo
 
 class UserInfoActivity : BaseActivity<UserViewModel>() {
 
@@ -29,23 +30,23 @@ class UserInfoActivity : BaseActivity<UserViewModel>() {
 
         user_info_get_info_btn.apply {
             setOnClickListener {
-                //                mViewModel?.getUserByLoginInfo(mNameEdt.text.toString())
-//                    ?.observe(this@UserInfoActivity, object : BaseObserser<UserInfo>() {
-//                        override fun onSuccess(data: UserInfo) {
-//                            Log.d("Info", "UserInfoActivity: " + data.name)
-//                            mInfoTxt.text = data.name
-//                        }
-//
-//                        override fun onFail(error: String) {
-//                            Log.d("Info", "UserInfoActivity: " + error)
-//                            mInfoTxt.text = error
-//
-//                        }
-//                    })
-                Intent(this@UserInfoActivity, MainActivity::class.java).also { intent ->
-                    startActivity(intent)
-                }
-                finish()
+                mViewModel?.getUserByLoginInfo(mNameEdt.text.toString())
+                    ?.observe(this@UserInfoActivity, object : BaseObserser<UserInfo>() {
+                        override fun onSuccess(data: UserInfo) {
+                            Log.d("Info1", "UserInfoActivity: " + data.name)
+                            mInfoTxt.text = data.name
+                        }
+
+                        override fun onFail(error: String) {
+                            Log.d("Info1", "UserInfoActivity: " + error)
+                            mInfoTxt.text = error
+
+                        }
+                    })
+//                Intent(this@UserInfoActivity, MainActivity::class.java).also { intent ->
+//                    startActivity(intent)
+//                }
+//                finish()
             }
         }
 

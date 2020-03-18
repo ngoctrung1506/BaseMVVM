@@ -1,4 +1,4 @@
-package base
+package base.mvvm
 
 import android.content.Context
 import android.os.Bundle

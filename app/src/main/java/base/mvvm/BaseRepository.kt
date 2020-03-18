@@ -1,4 +1,4 @@
-package base
+package base.mvvm
 
 open class BaseRepository {
 }

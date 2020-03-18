@@ -1,6 +1,6 @@
 package base.api
 
-class HttpError {
+class HttpError(errorMessage: String) {
 
     companion object {
         const val UNKNOWN_ERROR = "UNKNOWN_ERROR"

@@ -1,6 +1,7 @@
 package tgo.lostandfound.api.user
 
-import retrofit2.Call
+import io.reactivex.Observable
+import io.reactivex.Observer
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -10,5 +11,5 @@ interface IUserApi {
 //    fun getAllUser(): Call<>
 
     @GET("users/{login}")
-    fun getUser(@Path("login") login: String): Call<UserInfo>
+    fun getUser(@Path("login") login: String): Observable<UserInfo>
 }

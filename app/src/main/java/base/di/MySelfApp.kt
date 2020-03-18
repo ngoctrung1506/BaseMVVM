@@ -1,8 +1,12 @@
 package base.di
 
 import android.app.Application
-import base.di.demo.DaggerDemoComponent
-import base.di.demo.DemoComponent
+import base.di.component.ApiComponent
+import base.di.component.DaggerApiComponent
+import base.di.component.DaggerRepositoryComponent
+import base.di.component.RepositoryComponent
+import base.di.module.ApiModule
+import base.di.module.RepoModule
 
 class MySelfApp : Application() {
 
