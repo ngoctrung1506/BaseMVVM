@@ -14,26 +14,26 @@ abstract class BaseCallBack<T> : Callback<T> {
         t.printStackTrace()
         when (t) {
             is HttpException -> {
-                onResult(t.asErrorResult<T>().apply {
+                onResult(t.asErrorResult<T>()/*.apply {
                     error = HttpError.HTTP_EXCEPTION
-                })
+                }*/)
             }
 
             is UnknownHostException -> {
-                onResult(t.asErrorResult<T>().apply {
+                onResult(t.asErrorResult<T>()/*.apply {
                     error = HttpError.UNKNOW_HOST_EXCEPTION
-                })
+                }*/)
             }
 
             is SocketTimeoutException -> {
-                onResult(t.asErrorResult<T>().apply {
+                onResult(t.asErrorResult<T>()/*.apply {
                     error = HttpError.SOCKET_TIME_OUT_EXCEPTION
-                })
+                }*/)
             }
             else ->
-                onResult(t.asErrorResult<T>().apply {
+                onResult(t.asErrorResult<T>()/*.apply {
                     error = HttpError.UNKNOWN_ERROR
-                })
+                }*/)
         }
     }
 
@@ -43,7 +43,7 @@ abstract class BaseCallBack<T> : Callback<T> {
                 onResult(it.asResult())
             }
         } else {
-            onResult(response.message().asResult())
+//            onResult(response.message().asResult())
         }
     }
 

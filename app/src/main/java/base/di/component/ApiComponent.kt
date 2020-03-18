@@ -1,5 +1,6 @@
-package base.di
+package base.di.component
 
+import base.di.module.ApiModule
 import dagger.Component
 import tgo.lostandfound.screen.main.MainScreenRepo
 import tgo.lostandfound.screen.user.UserRepository

@@ -1,4 +1,4 @@
-package base
+package base.mvvm
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

@@ -4,5 +4,5 @@ import androidx.lifecycle.MutableLiveData
 
 class Result<T>(
     var data: T?,
-    var error: String
+    var error: Throwable?
 )

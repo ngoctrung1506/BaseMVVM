@@ -45,7 +45,13 @@ ext {
             glide_version    : "4.9.0",
             lifecycle_version: "2.2.0",
             moshi            : "2.4.0",
-            dagger_version   : "2.5"
+            dagger_version   : "2.5",
+            rx_java          : "2.2.8",
+            rx_android       : "2.1.1",
+            rx_kotlin        : "2.1.0",
+            rx_adapter       : "2.4.0",
+            okhttp         : '3.8.1'
+
     ]
 
 }
@@ -83,6 +89,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lib_versions.lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lib_versions.lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lib_versions.lifecycle_version"
+    // optional - ReactiveStreams support for LiveData
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lib_versions.lifecycle_version"
 
     // moshi
     implementation "com.squareup.retrofit2:converter-moshi:$lib_versions.moshi"
@@ -90,6 +98,20 @@ dependencies {
     // dagger
     implementation "com.google.dagger:dagger:$lib_versions.dagger_version"
     kapt "com.google.dagger:dagger-compiler:$lib_versions.dagger_version"
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$lib_versions.rx_java"
+    // RxKotlin
+    implementation "io.reactivex.rxjava2:rxkotlin:$lib_versions.rx_kotlin"
+
+    // RxAndroid
+    implementation "io.reactivex.rxjava2:rxandroid:$lib_versions.rx_android"
+
+    //you need this to use RxAndroid with retrofit.
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$lib_versions.rx_adapter"
+    implementation "com.squareup.okhttp3:logging-interceptor:$lib_versions.okhttp"
+
+
 
 
 }

@@ -8,7 +8,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import base.BaseFragment
+import base.mvvm.BaseFragment
 import base.api.BaseObserser
 import butterknife.BindView
 import butterknife.OnClick

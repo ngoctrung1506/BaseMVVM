@@ -10,7 +10,7 @@ abstract class BaseObserser<T> : Observer<Result<T>> {
                 onSuccess(it)
             }
         } else if (t?.error != null) {
-            onFail(t.error)
+            onFail(t.error.toString())
         }
     }
 

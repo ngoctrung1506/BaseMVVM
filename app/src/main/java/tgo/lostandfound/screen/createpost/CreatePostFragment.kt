@@ -8,7 +8,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.room.Room
-import base.BaseFragment
+import base.mvvm.BaseFragment
 import butterknife.BindView
 import butterknife.OnClick
 import com.bumptech.glide.Glide

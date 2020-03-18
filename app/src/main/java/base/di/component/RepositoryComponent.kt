@@ -1,6 +1,6 @@
-package base.di
+package base.di.component
 
-import base.BaseViewModel
+import base.di.module.RepoModule
 import dagger.Component
 import tgo.lostandfound.screen.main.MainScreenViewModel
 import tgo.lostandfound.screen.user.UserViewModel
@@ -14,6 +14,6 @@ interface RepositoryComponent {
 
     fun inject(userViewModel: MainScreenViewModel)
 
-    fun inject(base: Class<out BaseViewModel>)
+//    fun inject(base: Class<out BaseViewModel>)
 
 }
