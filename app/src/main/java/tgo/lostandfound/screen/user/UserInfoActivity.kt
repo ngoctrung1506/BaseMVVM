@@ -10,6 +10,10 @@ import tgo.lostandfound.R
 import tgo.lostandfound.api.user.UserInfo
 
 class UserInfoActivity : BaseActivity<UserViewModel>() {
+    override fun getContainerId(): Int = 0
+    override fun getViewModel(): UserViewModel? {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
 
     lateinit var mNameEdt: EditText
@@ -27,7 +31,10 @@ class UserInfoActivity : BaseActivity<UserViewModel>() {
 
         mNameEdt = findViewById(R.id.user_info_name_edt)
         mInfoTxt = findViewById(R.id.user_info_info_txt)
+    }
 
+
+    override fun observeViewModel() {
         user_info_get_info_btn.apply {
             setOnClickListener {
                 mViewModel?.getUserByLoginInfo(mNameEdt.text.toString())
@@ -43,14 +50,10 @@ class UserInfoActivity : BaseActivity<UserViewModel>() {
 
                         }
                     })
-//                Intent(this@UserInfoActivity, MainActivity::class.java).also { intent ->
-//                    startActivity(intent)
-//                }
-//                finish()
             }
         }
-
     }
+
 }
 
 
