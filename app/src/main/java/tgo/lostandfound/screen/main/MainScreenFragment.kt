@@ -1,15 +1,14 @@
 package tgo.lostandfound.screen.main
 
 
-import android.content.Intent
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import base.mvvm.BaseFragment
 import base.api.BaseObserser
+import base.mvvm.BaseFragment
 import butterknife.BindView
 import butterknife.OnClick
 import tgo.lostandfound.R
@@ -18,7 +17,7 @@ import tgo.lostandfound.api.meta.MetaData
 import tgo.lostandfound.database.AppDataBase
 import tgo.lostandfound.model.Item
 import tgo.lostandfound.model.Post
-import tgo.lostandfound.screen.user.UserInfoActivity
+import tgo.lostandfound.screen.createpost.CreatePostFragment
 
 
 /**
@@ -98,11 +97,8 @@ class MainScreenFragment : BaseFragment<MainScreenViewModel>() {
 
     @OnClick(R.id.main_add_btn)
     fun onMove() {
-        mContext?.run {
-            Intent(mContext, UserInfoActivity::class.java).also { intent ->
-                startActivity(intent)
-            }
-            finish()
+        mActivity?.run {
+            mScreenTransitionImp.transitionTo(CreatePostFragment())
         }
 //        changeToScreen(CreatePostFragment())
 //        val list = mDatabase.itemDao().getAllItem()

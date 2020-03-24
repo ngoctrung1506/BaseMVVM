@@ -120,7 +120,7 @@ class CreatePostFragment : BaseFragment<CreatePostViewModel>() {
 
     @OnClick(R.id.create_post_btn_back)
     fun onBack() {
-        backToPreviousScreen(this)
+        mScreenTransitionImp.backScreen()
     }
 
 
@@ -163,7 +163,7 @@ class CreatePostFragment : BaseFragment<CreatePostViewModel>() {
                 mObjectImgPath, mNamePlaceTxt.text.toString(), "a", "Jonh"
             )
         )
-        backToPreviousScreen(this)
+        mScreenTransitionImp.backScreen()
     }
 
 
