@@ -1,6 +1,7 @@
 package tgo.lostandfound.screen.main
 
 
+import android.os.Handler
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import base.api.BaseObserser
 import base.mvvm.BaseFragment
+import base.utils.showLoadingDialog
 import butterknife.BindView
 import butterknife.OnClick
 import tgo.lostandfound.R
@@ -53,36 +55,7 @@ class MainScreenFragment : BaseFragment<MainScreenViewModel>() {
 
 
     override fun onCreateLayout() {
-//        activity?.let {
-//            mDatabase = Room.databaseBuilder(
-//                activity!!.applicationContext,
-//                AppDataBase::class.java, "item"
-//            ).allowMainThreadQueries().build()
-//
-//        }
-//        mListItem = if (mDatabase.itemDao().getAllItem() != null) {
-//            mDatabase.itemDao().getAllItem()
-//        } else mutableListOf<Item>()
-//
-//
-//        mListPost = mutableListOf<Post>()
-//        mListPost.add(Post("13/05/2019", mListItem))
-//        mListPost.add(Post("14/05/2019", mListItem))
-//        mListPost.add(Post("15/05/2019", mListItem))
-//        mListPost.add(Post("16/05/2019", mListItem))
-//        mListPost.add(Post("17/05/2019", mListItem))
-//        mListPost.add(Post("18/05/2019", mListItem))
-//        mPostAdapter = PostAdapter(mListPost, requireContext())
-//        var layoutManager1: LinearLayoutManager =
-//            LinearLayoutManager(
-//                activity,
-//                RecyclerView.VERTICAL, false
-//            )
-//        activity
-//        mObjectRecycler.layoutManager = layoutManager1
-//        mObjectRecycler.adapter = mPostAdapter
-//
-//        mListPost.onEach { it.day + "safs" }
+
         mViewModel?.getListItem()?.observe(this, object : BaseObserser<MetaData>() {
             override fun onFail(error: String) {
                 Log.d("Info", "Meta: " + error)
@@ -92,13 +65,15 @@ class MainScreenFragment : BaseFragment<MainScreenViewModel>() {
                 Log.d("Info", "Meta: " + data.listHooks.toString())
             }
         })
+        Handler().postDelayed({  showLoadingDialog(requireContext()) }, 100)
+
     }
 
 
     @OnClick(R.id.main_add_btn)
     fun onMove() {
         mActivity?.run {
-            mScreenTransitionImp.transitionTo(CreatePostFragment())
+            mScreenTransitionImp.addScreen(CreatePostFragment())
         }
 //        changeToScreen(CreatePostFragment())
 //        val list = mDatabase.itemDao().getAllItem()

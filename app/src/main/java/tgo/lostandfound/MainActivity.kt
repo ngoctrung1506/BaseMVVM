@@ -34,7 +34,7 @@ class MainActivity : BaseActivity<UserViewModel>() {
     override fun getContainerId(): Int = R.id.container_frame
 
     override fun onCreateLayout() {
-        mScreenTransitionImp.transitionTo(MainScreenFragment())
+        mScreenTransitionImp.addScreen(MainScreenFragment())
     }
 
     override fun observeViewModel() {
