@@ -11,7 +11,7 @@ interface ScreenTransitionIf {
      * @baseFragment an instance of fragment
      *
      */
-    fun transitionTo(fragment: BaseFragment<*>)
+    fun addScreen(fragment: BaseFragment<*>)
 
 
     /**
@@ -20,13 +20,49 @@ interface ScreenTransitionIf {
      * @baseFragment an instance of fragment
      *
      */
-    fun transitionTo(fragment: BaseFragment<*>, bundle: Bundle?)
+    fun addScreen(fragment: BaseFragment<*>, bundle: Bundle?)
 
     /**
      * Back to previous screen
      *
      */
     fun backScreen()
+
+    /**
+     * Back to previous screen with specific tag
+     *
+     */
+    fun backScreen(tag: String, type: Int)
+
+    /**
+     * Load existed screen.
+     *
+     * @param tag tag of existed screen
+     *
+     */
+    fun loadScreen(tag: String)
+
+
+    /**
+     * Hide screen.
+     *
+     * @param tag tag of screen.
+     *
+     */
+    fun hideScreen(tag: String)
+
+    /**
+     * Hide screen.
+     *
+     * @param fragment fragment to hide.
+     *
+     */
+    fun hideScreen(fragment: BaseFragment<*>)
+
+    /**
+     * Get fragment on the top of back stack
+     */
+    fun getLastFragmentByTag(): String?
 
 
 }

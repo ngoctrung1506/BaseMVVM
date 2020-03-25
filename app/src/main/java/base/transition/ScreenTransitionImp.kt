@@ -9,8 +9,54 @@ class ScreenTransitionImp(
     private var mContainerId: Int
 ) : ScreenTransitionIf {
 
+    override fun getLastFragmentByTag(): String? {
+        if (mFragmentManager.backStackEntryCount <= 0) return null
 
-    override fun transitionTo(fragment: BaseFragment<*>) {
+        val backEntry: FragmentManager.BackStackEntry
+
+        (mFragmentManager.backStackEntryCount - 1).let {
+            backEntry =
+                if (it > 0) {
+                    mFragmentManager.getBackStackEntryAt(it - 1)
+                } else mFragmentManager.getBackStackEntryAt(it)
+        }
+        return backEntry.name
+    }
+
+
+    override fun loadScreen(tag: String) {
+
+        if (mFragmentManager.findFragmentByTag(tag) != null) {
+
+            mFragmentManager.run {
+                findFragmentByTag(tag)?.let { currentFragment ->
+                    if (currentFragment.isHidden) {
+                        mFragmentManager.beginTransaction().run {
+                            fragments.forEach {
+                                hide(it)
+                            }
+                            show(currentFragment).commit()
+                        }
+
+                    }
+                }
+            }
+        }
+        // Xu ly them cac truong hop
+    }
+
+    override fun hideScreen(tag: String) {
+        mFragmentManager.findFragmentByTag(tag)?.let {
+            mFragmentManager.beginTransaction().hide(it).commit()
+        }
+    }
+
+    override fun hideScreen(fragment: BaseFragment<*>) {
+        mFragmentManager.beginTransaction().hide(fragment).commit()
+    }
+
+
+    override fun addScreen(fragment: BaseFragment<*>) {
         fragment.javaClass.name.let { name ->
             mFragmentManager.beginTransaction().run {
                 replace(mContainerId, fragment, name)
@@ -18,10 +64,9 @@ class ScreenTransitionImp(
                 commit()
             }
         }
-
     }
 
-    override fun transitionTo(fragment: BaseFragment<*>, bundle: Bundle?) {
+    override fun addScreen(fragment: BaseFragment<*>, bundle: Bundle?) {
         fragment.run {
             bundle?.let {
                 fragment.arguments = bundle
@@ -37,6 +82,12 @@ class ScreenTransitionImp(
     }
 
     override fun backScreen() {
-        mFragmentManager.popBackStack()
+        if (mFragmentManager.backStackEntryCount > 0)
+            mFragmentManager.popBackStack()
     }
+
+    override fun backScreen(tag: String, type: Int) {
+        mFragmentManager.popBackStack(tag, type)
+    }
+
 }

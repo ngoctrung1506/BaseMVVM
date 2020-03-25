@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import base.transition.ScreenTransitionImp
 import butterknife.ButterKnife
 import butterknife.Unbinder
+import tgo.lostandfound.screen.main.MainScreenFragment
 
 
 abstract class BaseActivity<VM> : AppCompatActivity() where VM : BaseViewModel {
