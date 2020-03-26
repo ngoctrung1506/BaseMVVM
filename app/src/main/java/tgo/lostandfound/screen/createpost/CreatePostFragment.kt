@@ -8,12 +8,12 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.room.Room
-import base.mvvm.BaseFragment
 import butterknife.BindView
 import butterknife.OnClick
 import com.bumptech.glide.Glide
 import com.frosquivel.magicalcamera.MagicalCamera
 import com.frosquivel.magicalcamera.MagicalPermissions
+import gooner.demo.mvvm.BaseFragment
 import tgo.lostandfound.R
 import tgo.lostandfound.database.AppDataBase
 import tgo.lostandfound.model.Item

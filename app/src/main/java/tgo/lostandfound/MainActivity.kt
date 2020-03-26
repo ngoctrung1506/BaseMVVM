@@ -1,9 +1,7 @@
 package tgo.lostandfound
 
 import android.util.Log
-import android.widget.FrameLayout
-import base.mvvm.BaseActivity
-import butterknife.BindView
+import gooner.demo.mvvm.BaseActivity
 import io.reactivex.disposables.Disposable
 import tgo.lostandfound.model.User
 import tgo.lostandfound.screen.main.MainScreenFragment
@@ -16,9 +14,6 @@ class MainActivity : BaseActivity<UserViewModel>() {
     @Inject
     lateinit var mUser: User
 
-    @BindView(R.id.container_frame)
-    lateinit var mContainerFr: FrameLayout
-
     lateinit var mDisposable: Disposable
 
     override fun getViewModel(): UserViewModel? = null
@@ -29,7 +24,6 @@ class MainActivity : BaseActivity<UserViewModel>() {
 
 
     override fun getLayoutId(): Int = R.layout.activity_container
-
 
     override fun getContainerId(): Int = R.id.container_frame
 
@@ -47,6 +41,5 @@ class MainActivity : BaseActivity<UserViewModel>() {
         Log.d("User1", "onDestroy")
 
     }
-
 
 }

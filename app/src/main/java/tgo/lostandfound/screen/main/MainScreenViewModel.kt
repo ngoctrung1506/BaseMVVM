@@ -1,8 +1,8 @@
 package tgo.lostandfound.screen.main
 
 import android.app.Application
-import base.mvvm.BaseViewModel
-import base.di.MySelfApp
+import gooner.demo.mvvm.BaseViewModel
+import gooner.demo.di.MySelfApp
 import javax.inject.Inject
 
 class MainScreenViewModel(application: Application) : BaseViewModel(application) {

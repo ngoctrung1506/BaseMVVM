@@ -1,9 +1,9 @@
 package tgo.lostandfound.screen.main
 
 import androidx.lifecycle.MutableLiveData
-import base.api.BaseCallBack
-import base.api.Result
-import base.di.MySelfApp
+import gooner.demo.api.BaseCallBack
+import gooner.demo.api.Result
+import gooner.demo.di.MySelfApp
 import tgo.lostandfound.api.meta.IMetaApi
 import tgo.lostandfound.api.meta.MetaData
 import tgo.lostandfound.dao.ItemDao
@@ -22,11 +22,11 @@ class MainScreenRepo {
 
 //    fun getListItem() = mItemDao.getAllItem()
 
-    fun getListItem(): MutableLiveData<Result<MetaData>> {
-        var data = MutableLiveData<Result<MetaData>>()
+    fun getListItem(): MutableLiveData<gooner.demo.api.Result<MetaData>> {
+        var data = MutableLiveData<gooner.demo.api.Result<MetaData>>()
 
-        mMetaDataApi.getMeta().enqueue(object : BaseCallBack<MetaData>() {
-            override fun onResult(result: Result<MetaData>) {
+        mMetaDataApi.getMeta().enqueue(object : gooner.demo.api.BaseCallBack<MetaData>() {
+            override fun onResult(result: gooner.demo.api.Result<MetaData>) {
                 data.value = result
             }
         })

@@ -58,8 +58,6 @@ ext {
 
 dependencies {
 
-    def butterknife = "10.2.0"
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //noinspection GradleCompatible
@@ -111,6 +109,7 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$lib_versions.rx_adapter"
     implementation "com.squareup.okhttp3:logging-interceptor:$lib_versions.okhttp"
 
+    implementation project(":base_mvvm")
 
 
 

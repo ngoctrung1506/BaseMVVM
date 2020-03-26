@@ -1,16 +1,14 @@
 package tgo.lostandfound.screen.main
 
 
-import android.os.Handler
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import base.api.BaseObserser
-import base.mvvm.BaseFragment
-import base.utils.showLoadingDialog
+import gooner.demo.api.BaseObserser
+import gooner.demo.mvvm.BaseFragment
 import butterknife.BindView
 import butterknife.OnClick
 import tgo.lostandfound.R
@@ -56,7 +54,7 @@ class MainScreenFragment : BaseFragment<MainScreenViewModel>() {
 
     override fun onCreateLayout() {
 
-        mViewModel?.getListItem()?.observe(this, object : BaseObserser<MetaData>() {
+        mViewModel?.getListItem()?.observe(this, object : gooner.demo.api.BaseObserser<MetaData>() {
             override fun onFail(error: String) {
                 Log.d("Info", "Meta: " + error)
             }
@@ -65,7 +63,7 @@ class MainScreenFragment : BaseFragment<MainScreenViewModel>() {
                 Log.d("Info", "Meta: " + data.listHooks.toString())
             }
         })
-        Handler().postDelayed({  showLoadingDialog(requireContext()) }, 100)
+//        mActivity?.showLoading()
 
     }
 
@@ -75,13 +73,6 @@ class MainScreenFragment : BaseFragment<MainScreenViewModel>() {
         mActivity?.run {
             mScreenTransitionImp.addScreen(CreatePostFragment())
         }
-//        changeToScreen(CreatePostFragment())
-//        val list = mDatabase.itemDao().getAllItem()
-//        mListPost.add(Post("13/05/2019", list))
-//        mListPost.add(Post("14/05/2019", list))
-//        mListPost.add(Post("15/05/2019", list))
-//        mListPost.add(Post("16/05/2019", list))
-//        mPostAdapter.updateList(mListPost)
     }
 
     override fun onResume() {

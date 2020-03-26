@@ -3,8 +3,8 @@ package tgo.lostandfound.screen.user
 import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
-import base.api.BaseObserser
-import base.mvvm.BaseActivity
+import gooner.demo.api.BaseObserser
+import gooner.demo.mvvm.BaseActivity
 import kotlinx.android.synthetic.main.activity_user_info.*
 import tgo.lostandfound.R
 import tgo.lostandfound.api.user.UserInfo
@@ -38,7 +38,7 @@ class UserInfoActivity : BaseActivity<UserViewModel>() {
         user_info_get_info_btn.apply {
             setOnClickListener {
                 mViewModel?.getUserByLoginInfo(mNameEdt.text.toString())
-                    ?.observe(this@UserInfoActivity, object : BaseObserser<UserInfo>() {
+                    ?.observe(this@UserInfoActivity, object : gooner.demo.api.BaseObserser<UserInfo>() {
                         override fun onSuccess(data: UserInfo) {
                             Log.d("Info1", "UserInfoActivity: " + data.name)
                             mInfoTxt.text = data.name
