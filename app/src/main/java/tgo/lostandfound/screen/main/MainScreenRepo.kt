@@ -3,10 +3,10 @@ package tgo.lostandfound.screen.main
 import androidx.lifecycle.MutableLiveData
 import gooner.demo.api.BaseCallBack
 import gooner.demo.api.Result
-import gooner.demo.di.MySelfApp
 import tgo.lostandfound.api.meta.IMetaApi
 import tgo.lostandfound.api.meta.MetaData
 import tgo.lostandfound.dao.ItemDao
+import tgo.lostandfound.di.MySelfApp
 import javax.inject.Inject
 
 class MainScreenRepo {

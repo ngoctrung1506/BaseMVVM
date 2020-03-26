@@ -60,15 +60,15 @@ abstract class BaseActivity<VM> : AppCompatActivity() where VM : BaseViewModel {
      */
     protected abstract fun getViewModel(): VM?
 
-    abstract protected fun initViewModelClass(): Class<VM>?
+    protected abstract fun initViewModelClass(): Class<VM>?
 
-    abstract protected fun onCreateLayout()
+    protected abstract fun onCreateLayout()
 
     @LayoutRes
-    abstract protected fun getLayoutId(): Int
+    protected abstract fun getLayoutId(): Int
 
     @IdRes
-    abstract protected fun getContainerId(): Int
+    protected abstract fun getContainerId(): Int
 
 
     fun showLoading() {

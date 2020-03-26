@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="gooner.demo.base_mvvm" />
+<manifest package="gooner.demo.base_mvvm" />

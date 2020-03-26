@@ -4,9 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import gooner.demo.api.Result
 import gooner.demo.api.RetrofitSubscriber
 import gooner.demo.api.doSt
-import gooner.demo.di.MySelfApp
 import tgo.lostandfound.api.user.IUserApi
 import tgo.lostandfound.api.user.UserInfo
+import tgo.lostandfound.di.MySelfApp
 import javax.inject.Inject
 
 class UserRepository {

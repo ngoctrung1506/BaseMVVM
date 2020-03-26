@@ -1,4 +1,3 @@
 package gooner.demo.mvvm
 
-open class BaseRepository {
-}
+open class BaseRepository

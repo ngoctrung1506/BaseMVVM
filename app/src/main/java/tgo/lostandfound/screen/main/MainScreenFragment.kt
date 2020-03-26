@@ -7,10 +7,9 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import gooner.demo.api.BaseObserser
-import gooner.demo.mvvm.BaseFragment
 import butterknife.BindView
 import butterknife.OnClick
+import gooner.demo.mvvm.BaseFragment
 import tgo.lostandfound.R
 import tgo.lostandfound.adapter.PostAdapter
 import tgo.lostandfound.api.meta.MetaData
@@ -53,7 +52,9 @@ class MainScreenFragment : BaseFragment<MainScreenViewModel>() {
 
 
     override fun onCreateLayout() {
+    }
 
+    override fun observerViewModel() {
         mViewModel?.getListItem()?.observe(this, object : gooner.demo.api.BaseObserser<MetaData>() {
             override fun onFail(error: String) {
                 Log.d("Info", "Meta: " + error)
@@ -63,8 +64,6 @@ class MainScreenFragment : BaseFragment<MainScreenViewModel>() {
                 Log.d("Info", "Meta: " + data.listHooks.toString())
             }
         })
-//        mActivity?.showLoading()
-
     }
 
 

@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import gooner.demo.transition.ScreenTransitionImp
 import butterknife.ButterKnife
 import butterknife.Unbinder
+import gooner.demo.transition.ScreenTransitionImp
 
 
 abstract class BaseFragment<VM> : Fragment() where VM : BaseViewModel {
@@ -44,11 +44,14 @@ abstract class BaseFragment<VM> : Fragment() where VM : BaseViewModel {
             }
         }
         onCreateLayout()
+        observerViewModel()
     }
 
-    abstract protected fun onCreateLayout()
+    protected abstract fun observerViewModel()
 
-    abstract protected fun getViewModelClass(): Class<VM>?
+    protected abstract fun onCreateLayout()
+
+    protected abstract fun getViewModelClass(): Class<VM>?
 
     @LayoutRes
     abstract fun getLayoutId(): Int

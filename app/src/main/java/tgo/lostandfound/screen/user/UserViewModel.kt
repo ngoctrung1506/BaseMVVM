@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import gooner.demo.api.Result
-import gooner.demo.di.MySelfApp
 import gooner.demo.mvvm.BaseViewModel
 import tgo.lostandfound.api.user.UserInfo
+import tgo.lostandfound.di.MySelfApp
 import javax.inject.Inject
 
 class UserViewModel(application: Application) : BaseViewModel(application) {
